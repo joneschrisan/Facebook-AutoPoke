@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 function do_poke() {
-    if(AutoPokeCounterOnOff.checked == true) {
+    if(document.getElementById("AutoPokeCounterOnOff").checked == true) {
         var AutoPokeATags = document.getElementsByTagName("a");
         for(i = 0; i < AutoPokeATags.length; i++) {
             if(AutoPokeATags[i].innerHTML.match(/<img[a-z|A-Z|:|\/|=|\"|0-9|_| |.|;|]*>Poke back/gi)) {
