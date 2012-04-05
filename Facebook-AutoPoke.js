@@ -3,7 +3,7 @@
 // @namespace  https://github.com/joneschrisan/Facebook-AutoPoke
 // @version    0.2.1
 // @description  Atomaticaly pokes people who poke you on facebook
-// @match      http://www.facebook.com/pokes
+// @match      http://*facebook.com/pokes*
 // @copyright  2012+, Chris 'CJ' Jones
 // ==/UserScript==
 
