@@ -9,6 +9,7 @@ Change log:
 0.2.1:
 Changed the UI bit that it writes into the poke page to be more user friendly.
 Fixed a bug in firefox greasemonky.
+Updated to use all facebook sub domains and poke pages.
 
 0.2.0:
 Put start into it's own function.
