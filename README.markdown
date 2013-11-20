@@ -1,10 +1,14 @@
 A Facebook Autopoke script for the Tampermonky Google Chrome App and firefox greasemonky.
 
-Current version 0.2.1
+Current version 1.0.0
 
 Please check the issues page or Wiki page on https://www.github.com/joneschrisan/Facebook-AutoPoke/ for any known bugs.
 
 Change log:
+
+1.0.0
+A complete re-write of the userscript and the UI.
+Now copes with http or https.
 
 0.2.1:
 Changed the UI bit that it writes into the poke page to be more user friendly.
