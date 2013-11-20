@@ -3,7 +3,7 @@
 // @namespace  https://github.com/joneschrisan/Facebook-AutoPoke
 // @version    1.0.0
 // @description  Atomaticaly pokes people who poke you on facebook
-// @match      *://*.facebook.*/pokes
+// @match      *://*.facebook.com/pokes
 // @copyright  2013+, Chris 'CJ' Jones
 // ==/UserScript==
 
@@ -36,11 +36,18 @@ cj.facebook.autopoke = (function() {
     
     var _timeBetweenPokes = 5000, _autoStart = false;
     
-    var _numPokes = 0, _pokeHeader = null, _pokeButtons = Array(), _autoPokeTimeOutId = null;
+    var _numPokes = 0, _pokeHeader = null, _pokeButtons = Array(), _autoPokeTimeOutId = null, _pokeSuggested = false;
     
     function _searchPokeHeader() {
         var pokeHeader = document.getElementsByClassName('uiHeaderTitle');
-        _pokeHeader = pokeHeader[0];
+        var pokeHeaderLength = pokeHeader.length;
+        for(i = 0; i < pokeHeaderLength; i++) {
+            var html = pokeHeader[i].innerHTML.toLowerCase();
+            if(html.indexOf('pokes') > 0) {
+            	break;   
+            }
+    	}
+        _pokeHeader = pokeHeader[i];
     }
     
     function _drawControlConsole() {
@@ -65,7 +72,6 @@ cj.facebook.autopoke = (function() {
         autoPokeCounterOnOff.id = 'autoPokeCounterOnOff';
         if(_autoStart) autoPokeCounterOnOff.checked = 'checked';
         autoPokeCounterOnOff.onchange = function() {
-            console.log('running ' + this.checked);
             if(this.checked) {
                 _run();
             } else {
@@ -73,11 +79,34 @@ cj.facebook.autopoke = (function() {
             }
         }
         
+        //var autoPokeBR2 = document.createElement('br');
+        //
+        //var autoPokeSuggestedOnOffText = document.createElement('label');
+        //autoPokeSuggestedOnOffText.htmlFor = 'autoPokeSuggestedOnOffText';
+        //autoPokeSuggestedOnOffText.id = '_autoPokeSuggestedOnOffText';
+        //autoPokeSuggestedOnOffText.innerHTML = 'autoPokeSuggested On: ';
+        //
+        //var autoPokeSuggestedOnOff = document.createElement('input');
+        //autoPokeSuggestedOnOff.type = 'checkbox';
+        //autoPokeSuggestedOnOff.id = 'autoPokeSuggestedOnOff';
+        //if(_autoStart) autoPokeSuggestedOnOff.checked = 'checked';
+        //autoPokeSuggestedOnOff.onchange = function() {
+        //    if(this.checked) {
+        //        _pokeSuggested = true;
+        //    } else {
+        //        console.log('stop suggested');
+        //        _pokeSuggested = false;
+        //    }
+        //}
+        
         autoPokeContainer.appendChild(autoPokePokesText);
         autoPokeContainer.appendChild(autoPokePokes);
         autoPokeContainer.appendChild(autoPokeBR);
         autoPokeContainer.appendChild(autoPokeOnOffText);
         autoPokeContainer.appendChild(autoPokeCounterOnOff);
+        //autoPokeContainer.appendChild(autoPokeBR2);
+        //autoPokeContainer.appendChild(autoPokeSuggestedOnOffText);
+        //autoPokeContainer.appendChild(autoPokeSuggestedOnOff);
         
         _pokeHeader.appendChild(autoPokeContainer);
     }
@@ -87,8 +116,13 @@ cj.facebook.autopoke = (function() {
         var aTagsLength = aTags.length;
         for(i = 0, j = 0; i < aTagsLength; i++) {
             if(
-               (aTags[i].innerHTML.search('poke') >= 0) ||
-               (aTags[i].innerHTML.search('Poke') >= 0) ||
+               //(
+               // _pokeSuggested &&
+               // (
+               //  (aTags[i].innerHTML.search('poke') >= 0) ||
+               //	 (aTags[i].innerHTML.search('Poke') >= 0)
+               // )
+               //) ||
                (aTags[i].innerHTML.search('poke back') >= 0) ||
                (aTags[i].innerHTML.search('Poke back') >= 0)
               ) {
@@ -99,6 +133,7 @@ cj.facebook.autopoke = (function() {
     }
     
     function _run() {
+        _doPoke()
         _autoPokeTimeOutId = self.setInterval(_doPoke, _timeBetweenPokes);
         _updateNumPokes();
     }
@@ -111,10 +146,9 @@ cj.facebook.autopoke = (function() {
         _searchAllPokeButtons();
         var pokeButtonsLength = _pokeButtons.length;
         for(i = 0; i < pokeButtonsLength; i++) {
-            //var evt = document.createEvent('MouseEvents');
-            //evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-            //var canceled = !_pokeButtons[i].dispatchEvent(evt);
-            alert('click');
+            var evt = document.createEvent('MouseEvents');
+            evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            var canceled = !_pokeButtons[i].dispatchEvent(evt);
             _numPokes++;
         }
     }
@@ -150,7 +184,6 @@ cj.facebook.autopoke = (function() {
         },
         'init': {
             value: function(options_object) {
-                alert('init called');
                 if(options_object) {
                     var that = this;
                     Object.keys(options_object).forEach(
@@ -176,7 +209,6 @@ cj.facebook.autopoke = (function() {
 window.addEventListener(
     'load',
     function() {
-        alert('onload');
         cj.facebook.autopoke.init({
             timeBetweenPokes: 5000,
             autoStart: false
