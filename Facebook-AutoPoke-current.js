@@ -121,12 +121,10 @@
                    (
                     _pokeSuggested &&
                     (
-                     (aTags[i].innerHTML.search('poke') >= 0) ||
-                     (aTags[i].innerHTML.search('Poke') >= 0)
+                     (aTags[i].innerHTML.toLowerCase().search('poke') >= 0)
                     )
                    ) ||
-                   (aTags[i].innerHTML.search('poke back') >= 0) ||
-                   (aTags[i].innerHTML.search('Poke back') >= 0)
+                   (aTags[i].innerHTML.toLowerCase().search('poke back') >= 0)
                   ) {
                     _pokeButtons[j] = aTags[i];                    
                     j++;
