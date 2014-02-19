@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Facebook AutoPoke
 // @namespace    https://github.com/joneschrisan/Facebook-AutoPoke
-// @version      1.0.3
+// @version      1.0.4
 // @description  Automaticaly pokes people who poke you on facebook
 // @match        *://*.facebook.com/pokes*
 // @copyright    2013+, Chris 'CJ' Jones
