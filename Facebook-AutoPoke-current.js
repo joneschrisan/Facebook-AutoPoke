@@ -1,10 +1,11 @@
 // ==UserScript==
-// @name       Facebook AutoPoke
-// @namespace  https://github.com/joneschrisan/Facebook-AutoPoke
-// @version    1.0.3
-// @description  Atomaticaly pokes people who poke you on facebook
-// @match      *://*.facebook.com/pokes*
-// @copyright  2013+, Chris 'CJ' Jones
+// @name         Facebook AutoPoke
+// @namespace    https://github.com/joneschrisan/Facebook-AutoPoke
+// @version      1.0.4
+// @description  Automaticaly pokes people who poke you on facebook
+// @match        *://*.facebook.com/pokes*
+// @copyright    2013+, Chris 'CJ' Jones
+// @grant        none
 // ==/UserScript==
 (function() {
     if (!Object.create) {
@@ -121,12 +122,10 @@
                    (
                     _pokeSuggested &&
                     (
-                     (aTags[i].innerHTML.search('poke') >= 0) ||
-                     (aTags[i].innerHTML.search('Poke') >= 0)
+                     (aTags[i].innerHTML.toLowerCase().search('poke') >= 0)
                     )
                    ) ||
-                   (aTags[i].innerHTML.search('poke back') >= 0) ||
-                   (aTags[i].innerHTML.search('Poke back') >= 0)
+                   (aTags[i].innerHTML.toLowerCase().search('poke back') >= 0)
                   ) {
                     _pokeButtons[j] = aTags[i];                    
                     j++;
