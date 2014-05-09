@@ -1,6 +1,9 @@
 Change log:
 -----------
 
+1.0.4<br />
+Fixed case-related bug.
+
 1.0.3<br />
 Fixed Poke back counter.
 
