@@ -3,13 +3,16 @@ Fackbook-Autopoke
 
 A Facebook Autopoke script for the Tampermonky Google Chrome App and firefox greasemonky.
 
-Current version 1.0.4
+Current version 1.0.5
 ---------------------
 
 Please check the issues page or Wiki page on https://www.github.com/joneschrisan/Facebook-AutoPoke/ for any known bugs.
 
 Change log:
 -----------
+
+1.0.5<br />
+Added multi language support.
 
 1.0.4<br />
 Fixed case-related bug.

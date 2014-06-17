@@ -1,6 +1,9 @@
 Change log:
 -----------
 
+1.0.5<br />
+Added multi language support.
+
 1.0.4<br />
 Fixed case-related bug.
 
