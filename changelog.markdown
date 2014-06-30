@@ -3,6 +3,7 @@ Change log:
 
 1.0.5<br />
 Added multi language support.
+Added chrome extension manifest.
 
 1.0.4<br />
 Fixed case-related bug.
