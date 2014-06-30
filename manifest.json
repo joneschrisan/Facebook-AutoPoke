@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "joneschrisan's AutoPoke",
+  "description": "Automaticaly pokes people who poke you on facebook",
+  "version": "1.0.5",
+  
+  "content_scripts": [
+    {
+      "matches": ["https://*.facebook.com/pokes*", "http://*.facebook.com/pokes*"],
+	"run_at": "document_end",
+      "js": ["Facebook-AutoPoke-current.js"]
+    }
+  ],
+ 
+
+
+  "permissions": [
+    "https://*.facebook.com/pokes*", "http://*.facebook.com/pokes*"
+  ]
+  
+}
