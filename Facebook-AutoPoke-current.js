@@ -64,16 +64,19 @@
             
             _pokeContainerWords = [
             	'pokes', //English
-                'porren' //Dutch
+                'porren', //Dutch
+                'anstupser' //German
             ],
             _pokeWords = [
                 'poke', //English
-                'porren' //Dutch
+                'porren', //Dutch
+                'anstupsen' //German
             ],
             _pokeBackWords = [
                 'poke back', //English
                 'return fire', //English (Pirate)
                 'terugporren', //Dutch
+                'zurückstupsen' //German
             ]
         ;
         
