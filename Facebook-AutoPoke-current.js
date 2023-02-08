@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Facebook AutoPoke
 // @namespace    https://github.com/joneschrisan/Facebook-AutoPoke
-// @version      1.0.5
+// @version      1.0.6
 // @description  Automaticaly pokes people who poke you on facebook
 // @match        *://*.facebook.com/pokes*
 // @copyright    2013+, Chris 'CJ' Jones
@@ -13,7 +13,7 @@
         String.prototype.matchArray = function(array) {
             var
                 i = 0,
-                length = array.length
+                length = array.length,
                 returns = false
             ;
             for(i = 0; i < length; i++) {
@@ -22,13 +22,13 @@
             return returns;
         }
     }
-    
+
     if (!Object.create) {
         Object.create = (function() {
             function F(){};
-            
+
             return function(o, v) {
-                var v = v || false;
+                v = v || false;
                 if (arguments.length != 1 || arguments.length != 2) {
                     throw new Error('Object.create implementation only accepts two parameter.');
                 }
@@ -38,30 +38,30 @@
             }
         })()
     }
-    
+
     var cj = cj || {};
     cj.facebook = cj.facebook || {};
-    
+
     cj.facebook.autopoke = (function() {
         "use strict";
-        
+
         var
         	i = 0,
             j = 0,
-        	
+
         	autopoke = Object.create({}),
-        	
+
         	obj = autopoke,
-        	
+
         	_timeBetweenPokes = 5000,
             _autoStart = false,
-            
+
         	_numPokes = 0,
            	_pokeHeader = null,
             _pokeButtons = Array(),
             _autoPokeTimeOutId = null,
             _pokeSuggested = false,
-            
+
             _pokeContainerWords = [
             	'pokes', //English
                 'porren', //Dutch
@@ -79,36 +79,36 @@
                 'zurückstupsen' //German
             ]
         ;
-        
+
         function _searchPokeHeader() {
             var pokeHeader = document.getElementsByClassName('uiHeaderTitle');
             var pokeHeaderLength = pokeHeader.length;
             for(i = 0; i < pokeHeaderLength; i++) {
                 var html = pokeHeader[i].innerHTML.toLowerCase();
                 if(html.matchArray(_pokeContainerWords)) {
-                    break;   
+                    break;
                 }
             }
             _pokeHeader = pokeHeader[i];
         }
-        
+
         function _drawControlConsole() {
             var autoPokeContainer = document.createElement('h6');
-            
+
             var autoPokePokesText = document.createElement('span');
             autoPokePokesText.innerHTML = 'Pokes back: ';
-            
+
             var autoPokePokes = document.createElement('span');
             autoPokePokes.id = 'autoPokePokes';
             autoPokePokes.innerHTML = '0';
-            
+
             var autoPokeBR = document.createElement('br');
-            
+
             var autoPokeOnOffText = document.createElement('label');
             autoPokeOnOffText.htmlFor = 'autoPokeCounterOnOff';
             autoPokeOnOffText.id = '_autoPokeCounterOnOff';
             autoPokeOnOffText.innerHTML = 'autoPoke On: ';
-            
+
             var autoPokeCounterOnOff = document.createElement('input');
             autoPokeCounterOnOff.type = 'checkbox';
             autoPokeCounterOnOff.id = 'autoPokeCounterOnOff';
@@ -120,14 +120,14 @@
                     _stop();
                 }
             }
-            
+
             var autoPokeBR2 = document.createElement('br');
-            
+
             var autoPokeSuggestedOnOffText = document.createElement('label');
             autoPokeSuggestedOnOffText.htmlFor = 'autoPokeSuggestedOnOffText';
             autoPokeSuggestedOnOffText.id = '_autoPokeSuggestedOnOffText';
             autoPokeSuggestedOnOffText.innerHTML = 'autoPokeSuggested On: ';
-            
+
             var autoPokeSuggestedOnOff = document.createElement('input');
             autoPokeSuggestedOnOff.type = 'checkbox';
             autoPokeSuggestedOnOff.id = 'autoPokeSuggestedOnOff';
@@ -140,7 +140,7 @@
                     _pokeSuggested = false;
                 }
             }
-            
+
             autoPokeContainer.appendChild(autoPokePokesText);
             autoPokeContainer.appendChild(autoPokePokes);
             autoPokeContainer.appendChild(autoPokeBR);
@@ -149,10 +149,10 @@
             autoPokeContainer.appendChild(autoPokeBR2);
             autoPokeContainer.appendChild(autoPokeSuggestedOnOffText);
             autoPokeContainer.appendChild(autoPokeSuggestedOnOff);
-            
+
             _pokeHeader.appendChild(autoPokeContainer);
         }
-        
+
         function _searchAllPokeButtons() {
             _pokeButtons = Array();
             var aTags = document.getElementsByTagName('a');
@@ -167,21 +167,21 @@
                    ) ||
                    (aTags[i].innerHTML.toLowerCase().matchArray(_pokeBackWords))
                   ) {
-                    _pokeButtons[j] = aTags[i];                    
+                    _pokeButtons[j] = aTags[i];
                     j++;
                 }
             }
         }
-        
+
         function _run() {
             _doPoke()
             _autoPokeTimeOutId = self.setInterval(_doPoke, _timeBetweenPokes);
         }
-        
+
         function _stop() {
             clearInterval(_autoPokeTimeOutId);
         }
-        
+
         function _doPoke() {
             _searchAllPokeButtons();
             var pokeButtonsLength = _pokeButtons.length;
@@ -195,11 +195,11 @@
                 _updateNumPokes();
             }
         }
-        
+
         function _updateNumPokes() {
             document.getElementById('autoPokePokes').innerHTML = _numPokes;
         }
-        
+
         Object.defineProperties(obj, {
             'timeBetweenPokes': {
                 configurable: false,
@@ -243,9 +243,9 @@
                 enumerable: false
             }
         });
-        
+
         if(false) Object.seal(obj);
-        
+
         return obj;
     })();
 
